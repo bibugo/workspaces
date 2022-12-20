@@ -1,0 +1,7 @@
+{
+	"name": "Srv",
+	"dockerComposeFile": [ "../../docker-compose.yml" ],
+	"service": "srv",
+	"workspaceFolder": "/home/node/workspaces/srv",
+	"remoteUser": "node"
+}

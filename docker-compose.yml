@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  app:
+    user: node
+    build:
+      context: ./app/.devcontainer
+      dockerfile: ../../Dockerfile
+      args:
+        - WORKDIR_SUB=app
+        - EXPOSE_PORT=5174
+    volumes:
+      - .:/home/node/workspaces:cached
+    depends_on:
+      - srv
+    network_mode: host
+    command: /bin/sh -c 'cd ~/workspaces/app && npm install && npm run dev'
+  srv:
+    user: node
+    build:
+      context: ./srv/.devcontainer
+      dockerfile: ../../Dockerfile
+      args:
+        - WORKDIR_SUB=srv
+        - EXPOSE_PORT=3001
+    volumes:
+      - .:/home/node/workspaces:cached
+    network_mode: host
+    command: /bin/sh -c 'cd ~/workspaces/srv && npm install && nodemon index.js'
